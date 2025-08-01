@@ -25,7 +25,7 @@ jobs:
         run: black --check .
 
   run-tests:
-    needs: black-format # ✅ This job runs only if black-format passes
+    needs: black-format
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -45,9 +45,9 @@ jobs:
         run: pytest
 
   deploy:
-    needs: run-tests # ✅ This job runs only if tests pass
+    needs: run-tests
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' # Deploy only from main branch
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Deploy
         run: echo "Deploying the app..."
